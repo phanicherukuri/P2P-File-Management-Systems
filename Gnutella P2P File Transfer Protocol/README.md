@@ -1,12 +1,10 @@
 # Design Document
 In this project, we are implementing Gnutella-style peer-to-peer (P2P) system, where each peer acts as a Client and Server simultaneously. As a client, it requests file from other peers and download file from any particular peer, as a Server it processes requests from other clients, forwards to its neighbor peers (if any). I have implemented Gnutella-style peer-to-peer system in the Java Socket Programming.
-
-<br />
-In my implementation of the project, I have used two java files: Client.java, FileInfo.java and one ConfigFile. I have implemented Client, ClientAsServer, handleServer, and ConnectionEstablishment classes in the same file (Client.java) as here we have only Client but not any central server so we will have only one main() method in the entire program. <br />
+In my implementation of the project, I have used two java files: Client.java, FileInfo.java and one ConfigFile. I have implemented Client, ClientAsServer, handleServer, and ConnectionEstablishment classes in the same file (Client.java) as here we have only Client but not any central server so we will have only one main() method in the entire program.
 ## Working
-In this project everything is done by Peer. Since there is no central indexing server, search is done by distributed manner i.e., each peer maintains a list of peers (its neighbors), when a peer gets a request for a particular file, it searches and forwards to its neighbors.<br />
-### ConfigFile.properties
-ConfigFile contains static information regarding peers. We have implemented our project in star and mesh topologies. ConfigFile contains each peer port-number and neighbors. This file has .properties extension and it is stored in the project folder unlike src folder. Star and Mesh topologies have different neighbors. <br />
+In this project everything is done by Peer. Since there is no central indexing server, search is done by distributed manner i.e., each peer maintains a list of peers (its neighbors), when a peer gets a request for a particular file, it searches and forwards to its neighbors.
+### ConfigFile.properties:
+ConfigFile contains static information regarding peers. We have implemented our project in star and mesh topologies. ConfigFile contains each peer port-number and neighbors. This file has .properties extension and it is stored in the project folder unlike src folder. Star and Mesh topologies have different neighbors.
 ### Client.java:
 Client.java is peer file with respect to a particular client. Each peer acts as Client, provides interfaces through which user can issue requests and view search results and as a Server, responds for requests and forwards requests to its neighbors. I have implemented three classes in this file. 
 #### - Client:
