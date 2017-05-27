@@ -1,13 +1,13 @@
-#Design Document
+# Design Document
 In this project, we are implementing Gnutella-style peer-to-peer (P2P) system, where each peer acts as a Client and Server simultaneously. As a client, it requests file from other peers and download file from any particular peer, as a Server it processes requests from other clients, forwards to its neighbor peers (if any). I have implemented Gnutella-style peer-to-peer system in the Java Socket Programming.
 
-
-In my implementation of the project, I have used two java files: Client.java, FileInfo.java and one ConfigFile. I have implemented Client, ClientAsServer, handleServer, and ConnectionEstablishment classes in the same file (Client.java) as here we have only Client but not any central server so we will have only one main() method in the entire program.
-##Working
-In this project everything is done by Peer. Since there is no central indexing server, search is done by distributed manner i.e., each peer maintains a list of peers (its neighbors), when a peer gets a request for a particular file, it searches and forwards to its neighbors.
-###ConfigFile.properties
-ConfigFile contains static information regarding peers. We have implemented our project in star and mesh topologies. ConfigFile contains each peer port-number and neighbors. This file has .properties extension and it is stored in the project folder unlike src folder. Star and Mesh topologies have different neighbors. 
-###Client.java
+<br />
+In my implementation of the project, I have used two java files: Client.java, FileInfo.java and one ConfigFile. I have implemented Client, ClientAsServer, handleServer, and ConnectionEstablishment classes in the same file (Client.java) as here we have only Client but not any central server so we will have only one main() method in the entire program. <br />
+## Working
+In this project everything is done by Peer. Since there is no central indexing server, search is done by distributed manner i.e., each peer maintains a list of peers (its neighbors), when a peer gets a request for a particular file, it searches and forwards to its neighbors.<br />
+### ConfigFile.properties
+ConfigFile contains static information regarding peers. We have implemented our project in star and mesh topologies. ConfigFile contains each peer port-number and neighbors. This file has .properties extension and it is stored in the project folder unlike src folder. Star and Mesh topologies have different neighbors. <br />
+### Client.java:
 Client.java is peer file with respect to a particular client. Each peer acts as Client, provides interfaces through which user can issue requests and view search results and as a Server, responds for requests and forwards requests to its neighbors. I have implemented three classes in this file. 
 #### - Client:
 Our project execution starts with Client class as it contains main(). First, configFile is loaded using load() method. When user enters peerid, displays neighbors and their particular port-numbers, Client class acquire these details from configFile using getProperty(). Peer enters directory of that peer. ClientAsServer, which acts as server, thread is started with this peerid so that meanwhile if some other peer requests any file it can pass result from its directory, for this thread peer-portnumber and directory are passed to constructor so that server can establish connection with that port-number and search in the peer directory. Now, peer requests for a particular file and enters TTL value. Client class generates a random key i.e., messageID, based on peerid and sequence number, for each new request from the user. Random key, used to prevent recursive loop, is maintained by the peers, so that if a peer receives a request for the second time it stops flooding. ConnectionEstablishment thread class is called for each neighbor and the instances of ConnectionEstablishment, to get result and Thread are stored. Join() is used to stop further execution until termination of child thread process. After terminating all child processes result from processes is stored Searchresults. After peer deciding from which peer to download file, file downloads to peer directory, this process occurs in download(). Here files are downloading in form of chunks. 
